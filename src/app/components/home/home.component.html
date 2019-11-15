@@ -1,83 +1,69 @@
 <div class="page home">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-      
-              <h2 class="page-title">
-                <img class="svg" src="assets/svg/file.svg">
-                <span>Todo List App</span>
-              </h2>
-            </div>
-            <div class="col-md-6">
-              <form class="example-form">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Add Item">
-                </mat-form-field>
-                <button mat-stroked-button color="primary" type="button">Primary</button>
-              </form>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <div class="col-md-12">
-              <mat-card class="d-flex">
-                    <div class="example-container">
-                            <h2>To do</h2>
-                          
-                            <div
-                              cdkDropList
-                              #todoList="cdkDropList"
-                              [cdkDropListData]="todo"
-                              [cdkDropListConnectedTo]="[doneList]"
-                              class="example-list"
-                              (cdkDropListDropped)="drop($event)">
-                              <div class="example-box" *ngFor="let item of todo" cdkDrag>
-                                <img class="svg" src="assets/svg/clock.svg">
-                                {{item}}
-                                </div>
-                            </div>
-                          </div>
-                          
-                          <div class="example-container">
-                            <h2>Doing</h2>
-                          
-                            <div
-                              cdkDropList
-                              #doingList="cdkDropList"
-                              [cdkDropListData]="done"
-                              [cdkDropListConnectedTo]="[todoList,doneList]"
-                              class="example-list"
-                              (cdkDropListDropped)="drop($event)">
-                              <div class="example-box" *ngFor="let item of done" cdkDrag>
-                                    <img class="svg" src="assets/svg/hourglass.svg">
-                                    {{item}}
-                                </div>
-                            </div>
-                          </div>
-                          
-                          <div class="example-container">
-                                <h2>Done</h2>
-                              
-                                <div
-                                  cdkDropList
-                                  #doneList="cdkDropList"
-                                  [cdkDropListData]="test"
-                                  [cdkDropListConnectedTo]="[doingList]"
-                                  class="example-list"
-                                  (cdkDropListDropped)="drop($event)">
-                                  <div class="example-box" *ngFor="let item of test" cdkDrag>
-                                        <img class="svg" src="assets/svg/like.svg">
-                                        {{item}}</div>
-                                </div>
-                              </div>
-                 
-              </mat-card>
-            </div>
-          </div>
-          <div class="row mt-2">
-              <div class="col-md-12 text-center">
-                  <small>Copyright 2019 TodoList App</small>
-              </div> 
-          </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+
+        <h2 class="page-title">
+          <img class="svg" src="assets/svg/file.svg">
+          <span>Todo List App</span>
+        </h2>
       </div>
-      <router-outlet></router-outlet>
+      <div class="col-md-6">
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Add Item" #newItem>
+          </mat-form-field>
+          <button mat-stroked-button color="primary" type="submit" (click)="addTodo(newItem)">Primary</button>
+        </form>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12">
+
+        <mat-card class="d-flex">
+          <div class="example-container">
+            <h2>To do</h2>
+
+            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="data.todo" [cdkDropListConnectedTo]="[doingList]"
+              class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of data.todo" cdkDrag>
+                <img class="svg" src="assets/svg/clock.svg">
+                {{item}}
+              </div>
+            </div>
+          </div>
+
+          <div class="example-container">
+            <h2>Doing</h2>
+
+            <div cdkDropList #doingList="cdkDropList" [cdkDropListData]="data.doing"
+              [cdkDropListConnectedTo]="[todoList,doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of data.doing" cdkDrag>
+                <img class="svg" src="assets/svg/hourglass.svg">
+                {{item}}
+              </div>
+            </div>
+          </div>
+
+          <div class="example-container">
+            <h2>Done</h2>
+
+            <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="data.done" [cdkDropListConnectedTo]="[doingList]"
+              class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of data.done" cdkDrag>
+                <img class="svg" src="assets/svg/like.svg">
+                {{item}}</div>
+            </div>
+          </div>
+
+        </mat-card>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12 text-center">
+        <small>Copyright 2019 TodoList App</small>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
